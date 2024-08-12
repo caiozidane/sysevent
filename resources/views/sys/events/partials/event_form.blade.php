@@ -1,9 +1,11 @@
 @if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
 @endif
 
 <div class="row">
@@ -67,9 +69,9 @@
         <div class="mb-3 row ">
             <div class="col-sm-12">
                 <div class="col-sm-12">
-
-                    <input class="form-control" type="text" name="country_country_address"
-                        value="{{ $event->country_country_address ?? old('country_country_address') }}" placeholder="Endereço">
+                    <label for="country_address"></label>
+                    <input class="form-control" type="text" name="country_address"
+                        value="{{ $event->country_address ?? old('country_address') }}" placeholder="Endereço">
                 </div>
             </div>
         </div>
