@@ -65,8 +65,8 @@
                         <div class="col-md-4">
                             <div class="card card-body">
 
-                                <img class="card-img-top img-fluid" src="assets/images/small/img-1.jpg"
-                                    alt="Card image cap">
+                               <img src="{{ asset('storage/eventos/') }}/{{ $event->thumbnail }}"
+                                alt="img event" class="card-img-top img-fluid">
                                 <div class="card-body">
                                     <h4 class="card-title">{{ $event->title }}</h4>
                                     <p class="card-text text-muted font-size-13">{{ $event->description }}</p>
