@@ -60,9 +60,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="header-title">Foto</h5>
-                    <input type="file" name="thumbnail" id="input-file-now-custom-3"
-                        value="{{ asset('storage/eventos/') }}/{{ $event->thumbnail ?? old('thumbnail') }}"
-                        class="dropify" data-height="200" />
+                    <input type="file" name="thumbnail" id="input-file-now-custom-3" class="dropify" data-height="200" />
                 </div>
             </div>
         </div>
@@ -186,6 +184,10 @@
     <script src="{{ asset('assets/js/pages/form-repeater.init.js') }}"></script>
     <script>
         $(document).ready(function() {
+
+            $('.dropify').dropify({
+            defaultFile: "{{ asset('storage/eventos/' . ($event->thumbnail ?? old('thumbnail'))) }}"
+            });
 
             var arr = [];
             $(".ckd").each(function(item) {
