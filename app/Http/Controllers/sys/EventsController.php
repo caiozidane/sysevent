@@ -33,7 +33,6 @@ class EventsController extends Controller
             'birth_date' => array('title' => 'Data de Aniversário', 'required' => true, 'default' => "", "checked" => "", "type" => "text"),
             'company' => array('title' => "Empresa", 'required' => true, 'default' => "", "checked" => "", "type" => "text"),
             'institution' => array('title' => "Instituição de Ensino", 'required' => true, 'default' => "", "checked" => "", "type" => "text"),
-            'address' => array('title' => "Endereço", 'required' => true, 'default' => "", "checked" => "", "type" => "text"),
             'city' => array('title' => "Cidade", 'required' => true, 'default' => "", "checked" => "", "type" => "text"),
             'state' => array('title' => "Estado", 'required' => true, 'default' => "", "checked" => "", "type" => "text")
         );
@@ -42,9 +41,6 @@ class EventsController extends Controller
 
     public function store(StoreUpdateEvent $request)
     {
-
-        dd($request->all());
-
 
         $measure = array("w" => 1024, "h" => 400);
         $path = $this->storageFolder;
