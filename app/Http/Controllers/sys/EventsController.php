@@ -20,29 +20,9 @@ class EventsController extends Controller
         return view("sys.events.event_index", compact("events"));
     }
 
-    public function create()
-    {
-        $fieldForm = array(
-            'first_name' => array('title' => 'Nome', 'required' => true, 'default' => "disabled", "checked" => "checked", "type" => "text"),
-            'last_name' => array('title' => 'Sobrenome', 'required' => true, 'default' => "disabled", "checked" => "checked", "type" => "text"),
-            'alias' => array('title' => 'Nome no Crachá', 'required' => true, 'default' => "", "checked" => "", "type" => "text"),
-            'cpf' => array('title' => 'CPF', 'required' => true, 'default' => "", "checked" => "", "type" => "text"),
-            'email' => array('title' => 'E-mail', 'required' => true, 'default' => "disabled", "checked" => "checked", "type" => "email"),
-            'celphone' => array('title' => 'Celular', 'required' => true, 'default' => "", "checked" => "", "type" => "text"),
-            'phone' => array('title' => 'Telefone', 'required' => true, 'default' => "", "checked" => "", "type" => "text"),
-            'birth_date' => array('title' => 'Data de Aniversário', 'required' => true, 'default' => "", "checked" => "", "type" => "text"),
-            'company' => array('title' => "Empresa", 'required' => true, 'default' => "", "checked" => "", "type" => "text"),
-            'institution' => array('title' => "Instituição de Ensino", 'required' => true, 'default' => "", "checked" => "", "type" => "text"),
-            'city' => array('title' => "Cidade", 'required' => true, 'default' => "", "checked" => "", "type" => "text"),
-            'state' => array('title' => "Estado", 'required' => true, 'default' => "", "checked" => "", "type" => "text")
-        );
-        return view("sys.events.event_create", compact("fieldForm"));
-    }
-
     public function store(StoreUpdateEvent $request)
     {
 
-        $measure = array("w" => 1024, "h" => 400);
         $path = $this->storageFolder;
 
         if (!Storage::exists($path)) {
@@ -89,7 +69,6 @@ class EventsController extends Controller
             ->with('message', 'Post deletado com sucesso!');
     }
 
-
     public function edit($id)
     {
 
@@ -99,17 +78,40 @@ class EventsController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        if (!$event = Event::find($id)) {
-            return redirect()->back();
+{
+    if (!$event = Event::find($id)) {
+        return redirect()->back();
+    }
+    $path = $this->storageFolder;
+
+    // Verificar se uma nova imagem foi enviada
+    if ($request->hasFile('thumbnail') && $request->file('thumbnail')->isValid()) {
+        // Deletar a imagem antiga
+        $oldImage = $event->thumbnail;
+        if ($oldImage && Storage::exists($path . '/' . $oldImage)) {
+            Storage::delete($path . '/' . $oldImage);
         }
 
-        $event->update($request->all());
+        // Fazer upload da nova imagem
+        $newImage = Helper::uploadImage($request, 'thumbnail', null, $this->storageFolder . "/", null);
 
-        return redirect()
-            ->route('events.index')
-            ->with('message', 'Evento atualizado com sucesso!');
+        // Atualizar o campo 'thumbnail' com a nova imagem
+        $event->thumbnail = $newImage;
     }
+
+    $event->title = $request->title;
+    $event->phone = $request->phone;
+    $event->mail = $request->mail;
+    $event->description = $request->description;
+    $event->datetime_begin = $request->datetime_begin;
+    $event->datetime_end = $request->datetime_end;
+    $event->country_address = $request->country_address;
+
+    $event->save();
+    return redirect()
+        ->route('events.index')
+        ->with('message', 'Evento atualizado com sucesso!');
+}
 
     public function search(Request $request)
     {

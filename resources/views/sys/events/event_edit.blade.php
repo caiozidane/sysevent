@@ -13,7 +13,8 @@
                             <div class="col-12">
                                 <div class="card-body">
                                     <h5 class="card-title">Cadastro do Evento</h5>
-                                    <form action="{{ route('events.update', $event->id) }}" method="post">
+                                    <form action="{{ route('events.update', $event->id) }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
                                         @include('sys.events.partials.event_form')

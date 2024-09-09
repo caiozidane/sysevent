@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 class Helper
 {
 
-    static function uploadImage($request, $nameFile, $id = null, $pathname, $class, $measure = array("w" => "", "h" => ""))
+    static function uploadImage($request, $nameFile, $id = null, $pathname, $class, $measure = array("w" => "1024", "h" => "400"))
     {
         //  Upload
         if ($request->hasFile($nameFile) && $request->file($nameFile)->isValid()) {
