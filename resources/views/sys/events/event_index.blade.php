@@ -4,7 +4,7 @@
 
 @section('content')
 
-@csrf
+    @csrf
 
     <div class="row">
         <div class="col-12">
@@ -56,9 +56,10 @@
                                                 class="btn btn-outline-secondary edit"><i
                                                     class="fas fa-edit "></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-                                            <a href="#" class="btn btn-outline-danger "><i
-                                                    class="far fa-trash-alt "><input value="{{ $event->id }}"
-                                                        type="hidden" name="_method" value="DELETE"></i></a>
+                                            <a href="{{ route('events.destroy', $event->id) }}"
+                                                class="btn btn-outline-danger "><i class="far fa-trash-alt "><input
+                                                        value="{{ $event->id }}" type="hidden" name="_method"
+                                                        value="DELETE"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
