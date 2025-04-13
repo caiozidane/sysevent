@@ -20,6 +20,11 @@ class EventsController extends Controller
         return view("sys.events.event_index", compact("events"));
     }
 
+    public function create()
+    {
+        return view('sys.events.event_create');
+    }
+
     public function store(StoreUpdateEvent $request)
     {
 
@@ -32,13 +37,13 @@ class EventsController extends Controller
         try {
             Event::create([
                 'title' => $request->title,
-                'thumbnail' => Helper::uploadImage($request, 'thumbnail', null, $this->storageFolder . "/", null, $measure),
+                // 'thumbnail' => Helper::uploadImage($request, 'thumbnail', null, $this->storageFolder . "/", null, $measure),
                 'phone' => $request->phone,
                 'mail' => $request->mail,
                 'description' => $request->description,
                 'datetime_begin' => $request->datetime_begin,
                 'datetime_end' => $request->datetime_end,
-                'country_address' => $request->country_address,
+                'address' => $request->address,
             ]);
         } catch (\Exception $e) {
             return back()->withErrors(['message' => 'Erro ao criar o evento: ' . $e->getMessage()]);
@@ -105,7 +110,7 @@ class EventsController extends Controller
     $event->description = $request->description;
     $event->datetime_begin = $request->datetime_begin;
     $event->datetime_end = $request->datetime_end;
-    $event->country_address = $request->country_address;
+    $event->address = $request->address;
 
     $event->save();
     return redirect()

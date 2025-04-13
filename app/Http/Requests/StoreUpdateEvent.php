@@ -25,7 +25,7 @@ class StoreUpdateEvent extends FormRequest
     {
         return [
             'title' => 'required|min:2|max:200',
-            'country_address' => 'required|min:5|max:160',
+            'address' => 'required|min:5|max:160',
         ];
     }
 
@@ -35,9 +35,9 @@ class StoreUpdateEvent extends FormRequest
             'title.required' => 'O título do evento é obrigatório',
             'title.min' => 'O título deve possuir mais de 2 caracteres',
             'title.max' => 'O título deve possuir menos de 200 caracteres',
-            'country_address.required' => 'O endereço do evento é obrigatório',
-            'country_address.min' => 'O endereço deve possuir mais de 5 caracteres',
-            'country_address.max' => 'O endereço deve possuir menos de 160 caracteres',
+            'address.required' => 'O endereço do evento é obrigatório',
+            'address.min' => 'O endereço deve possuir mais de 5 caracteres',
+            'address.max' => 'O endereço deve possuir menos de 160 caracteres',
         ];
     }
 }

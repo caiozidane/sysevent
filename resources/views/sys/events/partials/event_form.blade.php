@@ -68,9 +68,9 @@
         <div class="mb-3 row ">
             <div class="col-sm-12">
                 <div class="col-sm-12">
-                    <label for="country_address"></label>
-                    <input class="form-control" type="text" name="country_address"
-                        value="{{ $event->country_address ?? old('country_address') }}" placeholder="Endereço">
+                    <label for="address"></label>
+                    <input class="form-control" type="text" name="address"
+                        value="{{ $event->address ?? old('address') }}" placeholder="Endereço">
                 </div>
             </div>
         </div>

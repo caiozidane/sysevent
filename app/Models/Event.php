@@ -17,7 +17,7 @@ class Event extends Model
         'description',
         'datetime_begin',
         'datetime_end',
-        'country_address',
+        'address',
         'publish_events' => 1,
         'situation' => 1,
     ];
