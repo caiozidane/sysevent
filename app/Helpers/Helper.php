@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 class Helper
 {
 
-    static function uploadImage($request, $nameFile, $id = null, $pathname, $class, $measure = array("w" => "1024", "h" => "400"))
+    static function uploadImage($request, $nameFile, $id = null, $pathname, $class)
     {
         //  Upload
         if ($request->hasFile($nameFile) && $request->file($nameFile)->isValid()) {
@@ -25,14 +25,7 @@ class Helper
 
             // Movendo a imagem
             $request->$nameFile->move($directory, $imageName);
-            $pathFileImg = $directory . "/" . $imageName;
-
-            // Manipulação da imagem
-            if ($measure["w"] && $measure["h"]) {
-                $img = ImageManagerStatic::make($pathFileImg)
-                    ->fit($measure["w"], $measure["h"]);
-                $img->save($pathFileImg, 90);
-            }
+            $pathFileImg = $directory . "/" . $imageName;       
 
             // Deletando o arquivo antigo
             if (!is_null($id)) {
