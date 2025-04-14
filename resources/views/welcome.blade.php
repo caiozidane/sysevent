@@ -43,7 +43,7 @@
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="{{ route('events.index') }}">Painel Admin</a>
                         </li>
                     </ul>
                     <form class="d-flex" role="search">
@@ -71,7 +71,7 @@
                                     <h4 class="card-title">{{ $event->title }}</h4>
                                     <p class="card-text text-muted font-size-13">{{ $event->description }}</p>
                                 </div>
-                                <a onclick="navToShow()" class="btn btn-primary">Inscreva-se</a>
+                                <a onclick="#" class="btn btn-primary">Inscreva-se</a>
 
                             </div>
                         </div>
