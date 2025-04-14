@@ -35,9 +35,16 @@ class EventsController extends Controller
         }
 
         try {
+
+            // Faz upload e salva o nome do arquivo
+            $thumbnail = Helper::uploadImage($request, 'thumbnail', null, $this->storageFolder . "/", null);
+
+            // Salva temporariamente o caminho para reaproveitar em caso de erro
+            $request->session()->flash('thumbnail_path', $thumbnail);
+
             Event::create([
                 'title' => $request->title,
-                'thumbnail' => Helper::uploadImage($request, 'thumbnail', null, $this->storageFolder . "/", null),
+                'thumbnail' => $thumbnail,
                 'phone' => $request->phone,
                 'mail' => $request->mail,
                 'description' => $request->description,
@@ -78,8 +85,8 @@ class EventsController extends Controller
     {
 
         $event = Event::findOrFail($id);
-
-        return view('sys.events.event_edit', compact('event'));
+        $storageFolder = 'eventos';
+        return view('sys.events.event_edit', compact('event', 'storageFolder'));
     }
 
     public function update(Request $request, $id)

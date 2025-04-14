@@ -26,6 +26,7 @@ class StoreUpdateEvent extends FormRequest
         return [
             'title' => 'required|min:2|max:200',
             'address' => 'required|min:5|max:160',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 

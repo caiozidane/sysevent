@@ -58,10 +58,19 @@
     <div class="col-6">
         <div class="col-xl-12">
             <div class="card">
+                @error('thumbnail')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 <div class="card-body">
                     <h5 class="header-title">Foto</h5>
-                    <input type="file" name="thumbnail" id="input-file-now-custom-3" class="dropify"
-                        data-height="200" />
+                    <input type="file"
+                        name="thumbnail"
+                        id="input-file-now-custom-3"
+                        class="dropify"
+                        data-height="200"
+                        data-default-file="{{ isset($event) && $event->thumbnail ? asset('storage/' . $storageFolder . '/' . $event->thumbnail) : '' }}"
+                    />
+                    <input type="hidden" name="thumbnail_path" value="{{ $event->thumbnail ?? '' }}">
                 </div>
             </div>
         </div>
