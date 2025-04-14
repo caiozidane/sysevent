@@ -37,7 +37,7 @@ class EventsController extends Controller
         try {
             Event::create([
                 'title' => $request->title,
-                // 'thumbnail' => Helper::uploadImage($request, 'thumbnail', null, $this->storageFolder . "/", null, $measure),
+                'thumbnail' => Helper::uploadImage($request, 'thumbnail', null, $this->storageFolder . "/", null),
                 'phone' => $request->phone,
                 'mail' => $request->mail,
                 'description' => $request->description,
